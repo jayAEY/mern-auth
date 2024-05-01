@@ -8,9 +8,29 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
 
 const Login = () => {
+  axios.defaults.withCredentials = true;
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  function handleSubmit() {
+    const url = `${import.meta.env.VITE_API_URL}/login`;
+    axios
+      .post(url, { email, password })
+      .then((res) => {
+        console.log(res);
+        navigate("/");
+      })
+      .catch((err) => console.log(err));
+
+    // console.log(email, password);
+  }
+
   return (
     <div className="flex items-center justify-center bg-muted min-h-svh w-svw">
       <Card className="max-w-sm max-h-96">
@@ -29,6 +49,7 @@ const Login = () => {
                 type="email"
                 placeholder="m@example.com"
                 required
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="grid gap-2">
@@ -39,11 +60,13 @@ const Login = () => {
                 id="password"
                 type="password"
                 required
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <Button
               type="submit"
               className="w-full"
+              onClick={handleSubmit}
             >
               Login
             </Button>
