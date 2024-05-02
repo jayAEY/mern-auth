@@ -7,12 +7,10 @@ import Home from "./components/Home";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
-// import Navbar from "@/components/Nav";
+import Dashboard from "./components/Dashboard";
 import { ThemeProvider } from "./components/theme-provider";
 
 function App() {
-  // const [count, setCount] = useState(0);
-
   return (
     <ThemeProvider
       defaultTheme="dark"
@@ -32,6 +30,10 @@ function App() {
           <Route
             path="/login"
             element={<Login />}
+          />
+          <Route
+            path="/dashboard"
+            element={<Dashboard />}
           />
         </Routes>
       </BrowserRouter>

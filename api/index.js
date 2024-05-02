@@ -34,25 +34,35 @@ app.get("/api/test", (req, res) => {
 });
 
 app.post("/api/register", async (req, res) => {
+  const { email, password } = req.body;
   try {
-    const { email, password } = req.body;
-    const newUser = new UserModel({ email, password });
-    await newUser.save();
-    return res.json({ registered: true });
+    const user = await UserModel.findOne({ email });
+    console.log(user);
+    if (user) {
+      return res.send("User already exists");
+    } else {
+      const newUser = new UserModel({ email, password });
+      await newUser.save();
+      return res.send(`${email} is now registered`);
+    }
   } catch (err) {
     console.log(err);
-    return res.json({ Error: err });
+    return res.send(err);
   }
 });
 
 app.post("/api/login", async (req, res) => {
+  const { email, password } = req.body;
   try {
-    const { email, password } = req.body;
-    // let user = await UserModel.findOne(email);
-    // return res.json(user[data]);
+    let user = await UserModel.findOne({ email });
+    user
+      ? password === user.password
+        ? res.send("Login Successful")
+        : res.send("Wrong Password")
+      : res.send("User doesn't exist");
   } catch (err) {
     console.log(err);
-    return res.json({ Error: err });
+    return res.send(err);
   }
 });
 

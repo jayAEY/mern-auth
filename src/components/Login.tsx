@@ -18,17 +18,17 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleSubmit() {
+  function handleSubmit(e) {
+    e.preventDefault();
     const url = `${import.meta.env.VITE_API_URL}/login`;
     axios
       .post(url, { email, password })
       .then((res) => {
-        console.log(res);
-        navigate("/");
+        res.data == "Login Successful"
+          ? (alert(res.data), navigate("/dashboard"))
+          : alert(res.data);
       })
       .catch((err) => console.log(err));
-
-    // console.log(email, password);
   }
 
   return (
@@ -41,36 +41,38 @@ const Login = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid gap-4">
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="m@example.com"
-                required
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
+          <form onSubmit={handleSubmit}>
+            <div className="grid gap-4">
+              <div className="grid gap-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="m@example.com"
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
-              <Input
-                id="password"
-                type="password"
-                required
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <div className="grid gap-2">
+                <div className="flex items-center">
+                  <Label htmlFor="password">Password</Label>
+                </div>
+                <Input
+                  id="password"
+                  type="password"
+                  required
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <Button
+                type="submit"
+                className="w-full"
+                // onClick={handleSubmit}
+              >
+                Login
+              </Button>
             </div>
-            <Button
-              type="submit"
-              className="w-full"
-              onClick={handleSubmit}
-            >
-              Login
-            </Button>
-          </div>
+          </form>
           <div className="mt-4 text-center text-sm">
             Don't have an account?{" "}
             <Link
