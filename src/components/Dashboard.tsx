@@ -1,6 +1,20 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Dashboard = () => {
+  axios.defaults.withCredentials = true;
+  const navigate = useNavigate();
+  function logout() {
+    const url = `${import.meta.env.VITE_API_URL}/logout`;
+    axios
+      .get(url)
+      .then((res) => {
+        if (res.data.logout) {
+          navigate("/");
+        }
+      })
+      .catch((err) => console.log(err));
+  }
   return (
     <main className="flex flex-col items-center justify-center w-svw h-svh bg-muted">
       <h1 className="text-7xl">🍔</h1>
@@ -11,12 +25,13 @@ const Dashboard = () => {
       <div className="text-center text-sm">
         <div className="text-center text-sm">
           Wrong account?{" "}
-          <Link
-            to="/login"
+          <button
+            type="submit"
             className="underline"
+            onClick={logout}
           >
-            Log out
-          </Link>
+            Log Out
+          </button>
         </div>
       </div>
     </main>

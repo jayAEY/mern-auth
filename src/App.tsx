@@ -1,7 +1,3 @@
-// import { useState } from "react";
-// import reactLogo from "./assets/react.svg";
-// import viteLogo from "/vite.svg";
-// import './App.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Register from "./components/Register";
@@ -9,8 +5,16 @@ import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Dashboard from "./components/Dashboard";
 import { ThemeProvider } from "./components/theme-provider";
+import axios from "axios";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_API_URL}/verify`)
+      .then((res) => console.log(res));
+  }, []);
+
   return (
     <ThemeProvider
       defaultTheme="dark"

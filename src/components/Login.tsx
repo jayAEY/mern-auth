@@ -24,8 +24,9 @@ const Login = () => {
     axios
       .post(url, { email, password })
       .then((res) => {
-        res.data == "Login Successful"
-          ? (alert(res.data), navigate("/dashboard"))
+        // res.data == "Login Successful"
+        res.data.login === true
+          ? (alert("Login Successful"), navigate("/dashboard"))
           : alert(res.data);
       })
       .catch((err) => console.log(err));
