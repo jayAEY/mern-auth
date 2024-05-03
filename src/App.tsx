@@ -6,13 +6,21 @@ import Navbar from "./components/Navbar";
 import Dashboard from "./components/Dashboard";
 import { ThemeProvider } from "./components/theme-provider";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [email, setEmail] = useState("");
+
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_API_URL}/verify`)
-      .then((res) => console.log(res));
+    axios.get(`${import.meta.env.VITE_API_URL}/verify`).then((res) => {
+      if (res.data.login === true) {
+        setLoggedIn(true);
+        setEmail(res.data.email);
+      } else {
+        setLoggedIn(false);
+      }
+    });
   }, []);
 
   return (
@@ -33,11 +41,11 @@ function App() {
           />
           <Route
             path="/login"
-            element={<Login />}
+            element={<Login setDisplayEmail={setEmail} />}
           />
           <Route
             path="/dashboard"
-            element={<Dashboard />}
+            element={<Dashboard email={email} />}
           />
         </Routes>
       </BrowserRouter>

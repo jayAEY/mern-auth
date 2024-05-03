@@ -78,9 +78,8 @@ app.post("/api/login", async (req, res) => {
 
 const verifyUser = (req, res, next) => {
   const token = req.cookies.token;
-
   if (!token) {
-    res.json({ message: "invalidUser" });
+    res.json({ login: false });
   } else {
     jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
       if (err) {
@@ -94,7 +93,7 @@ const verifyUser = (req, res, next) => {
 };
 
 app.get("/api/verify", verifyUser, (req, res) => {
-  return res.json({ login: true });
+  return res.json({ login: true, email: req.email });
 });
 
 app.get("/api/logout", (req, res) => {

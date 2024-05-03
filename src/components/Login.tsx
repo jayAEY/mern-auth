@@ -12,7 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 
-const Login = () => {
+const Login = ({ setDisplayEmail }) => {
   axios.defaults.withCredentials = true;
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -24,9 +24,10 @@ const Login = () => {
     axios
       .post(url, { email, password })
       .then((res) => {
-        // res.data == "Login Successful"
         res.data.login === true
-          ? (alert("Login Successful"), navigate("/dashboard"))
+          ? (setDisplayEmail(email),
+            alert("Login Successful"),
+            navigate("/dashboard"))
           : alert(res.data);
       })
       .catch((err) => console.log(err));
@@ -68,7 +69,7 @@ const Login = () => {
               <Button
                 type="submit"
                 className="w-full"
-                // onClick={handleSubmit}
+                onClick={handleSubmit}
               >
                 Login
               </Button>
