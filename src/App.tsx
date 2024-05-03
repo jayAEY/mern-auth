@@ -29,11 +29,15 @@ function App() {
       storageKey="vite-ui-theme"
     >
       <BrowserRouter>
-        <Navbar />
+        <Navbar
+          loggedIn={loggedIn}
+          setLoggedIn={setLoggedIn}
+          setEmail={setEmail}
+        />
         <Routes>
           <Route
             path="/"
-            element={<Home />}
+            element={<Home email={email} />}
           />
           <Route
             path="/register"
@@ -41,11 +45,23 @@ function App() {
           />
           <Route
             path="/login"
-            element={<Login setDisplayEmail={setEmail} />}
+            element={
+              <Login
+                setDisplayEmail={setEmail}
+                setLoggedIn={setLoggedIn}
+              />
+            }
           />
           <Route
             path="/dashboard"
-            element={<Dashboard email={email} />}
+            element={
+              <Dashboard
+                email={email}
+                setLoggedIn={setLoggedIn}
+                loggedIn={loggedIn}
+                setEmail={setEmail}
+              />
+            }
           />
         </Routes>
       </BrowserRouter>

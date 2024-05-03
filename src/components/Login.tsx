@@ -12,7 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 
-const Login = ({ setDisplayEmail }) => {
+const Login = ({ setDisplayEmail, setLoggedIn }) => {
   axios.defaults.withCredentials = true;
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -26,6 +26,7 @@ const Login = ({ setDisplayEmail }) => {
       .then((res) => {
         res.data.login === true
           ? (setDisplayEmail(email),
+            setLoggedIn(true),
             alert("Login Successful"),
             navigate("/dashboard"))
           : alert(res.data);
