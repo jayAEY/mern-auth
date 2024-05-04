@@ -9,6 +9,8 @@ import jwt, { decode } from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { UserModel } from "./models/Users.js";
 
+// generate key = node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -31,8 +33,6 @@ const connect = async () => {
 };
 
 connect();
-
-// generate key = node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 
 app.post("/api/register", async (req, res) => {
   const { email, password } = req.body;
