@@ -65,6 +65,8 @@ app.post("/api/login", async (req, res) => {
         res.cookie("token", token, { httpOnly: true, secure: true });
         return res.json({ login: true });
       }
+    } else {
+      res.send("No user found");
     }
   } catch (err) {
     console.log("err");
