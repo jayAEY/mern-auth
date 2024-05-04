@@ -9,18 +9,12 @@ import jwt, { decode } from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { UserModel } from "./models/Users.js";
 
-// const UserModel = require("./models/Users");
-
 dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(
   cors({
-    // origin: ["http://localhost:5173"],
-    origin: [
-      "https://mern-auth-eight-sigma.vercel.app",
-      "http://localhost:5173",
-    ],
+    origin: ["https://my-mern-auth.vercel.app/", "http://localhost:5173"],
     methods: ["GET", "POST"],
     credentials: true,
   })
@@ -64,13 +58,11 @@ app.post("/api/login", async (req, res) => {
     let user = await UserModel.findOne({ email });
     if (user) {
       const validatedPassword = await bcrypt.compare(password, user.password);
-      // console.log(validatedPassword);
       if (!validatedPassword) {
         res.send("Wrong Password");
       } else {
         const token = jwt.sign({ email }, process.env.JWT_KEY);
         res.cookie("token", token, { httpOnly: true, secure: true });
-        // res.send("Login Successful");
         return res.json({ login: true });
       }
     }
@@ -109,5 +101,3 @@ process.env.PORT &&
   app.listen(process.env.PORT, () => {
     console.log("Server is running at localhost:" + process.env.PORT);
   });
-
-// module.exports = app;
