@@ -62,7 +62,12 @@ app.post("/api/login", async (req, res) => {
         res.send("Wrong Password");
       } else {
         const token = jwt.sign({ email }, process.env.JWT_KEY);
-        res.cookie("token", token, { httpOnly: true, secure: true });
+        res.cookie("token", token, {
+          domain: "https://my-mern-auth.vercel.app",
+          httpOnly: true,
+          secure: true,
+          sameSite: "Lax",
+        });
         return res.json({ login: true });
       }
     } else {
