@@ -63,7 +63,6 @@ app.post("/api/login", async (req, res) => {
       } else {
         const token = jwt.sign({ email }, process.env.JWT_KEY);
         res.cookie("token", token, {
-          domain: "https://my-mern-auth.vercel.app/",
           httpOnly: true,
           secure: true,
           sameSite: "Lax",
