@@ -1,9 +1,1 @@
-{
-  "headers": [
-    {
-      "source": "/api/(.*)"
-    }
-  ],
-  "rewrites": [{ "source": "/api(.*)", "destination": "/api" }],
-  "routes": [{ "src": "/(.*)", "dest": "/" }]
-}
+{ "rewrites": [{ "source": "/api(.*)", "destination": "/api" }] }
