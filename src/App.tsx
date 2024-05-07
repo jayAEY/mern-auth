@@ -64,6 +64,10 @@ function App() {
               />
             }
           />
+          <Route
+            path="/*"
+            element={<Home email={email} />}
+          />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
