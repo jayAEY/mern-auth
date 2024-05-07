@@ -11,37 +11,38 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const mongoose = require("mongoose");
-const cookieParser = require("cookie-parser");
-const jwt = require("jsonwebtoken");
+// const mongoose = require("mongoose");
+// const cookieParser = require("cookie-parser");
+// const jwt = require("jsonwebtoken");
 // const jwt, { decode } = "jsonwebtoken";
-const bcrypt = require("bcrypt");
-const { UserModel } = "./models/Users.js";
+// const bcrypt = require("bcrypt");
+// const { UserModel } = "./models/Users.js";
 
 // generate key = node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 
 dotenv.config();
 const app = express();
-app.use(express.json());
+// app.use(express.json());
 app.use(
-  cors({
-    origin: ["https://mern-auth-xi-two.vercel.app", "http://localhost:5173"],
-    methods: ["GET", "POST"],
-    credentials: true,
-  })
+  cors()
+  // cors({
+  //   origin: ["https://mern-auth-xi-two.vercel.app", "http://localhost:5173"],
+  //   methods: ["GET", "POST"],
+  //   credentials: true,
+  // })
 );
-app.use(cookieParser());
+// app.use(cookieParser());
 
-const connect = async () => {
-  try {
-    mongoose.connect(process.env.URL);
-    console.log("Connected to Mongoose");
-  } catch (err) {
-    console.log(err);
-  }
-};
+// const connect = async () => {
+//   try {
+//     mongoose.connect(process.env.URL);
+//     console.log("Connected to Mongoose");
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 
-connect();
+// connect();
 
 app.get("/api/test", (req, res) => {
   res.json({ body: Date() });
@@ -91,25 +92,25 @@ app.get("/api/test", (req, res) => {
 //   }
 // });
 
-const verifyUser = (req, res, next) => {
-  const token = req.cookies.token;
-  if (!token) {
-    res.json({ login: false });
-  } else {
-    jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
-      if (err) {
-        return res.json({ message: "Invalid Token" });
-      } else {
-        req.email = decoded.email;
-        next();
-      }
-    });
-  }
-};
+// const verifyUser = (req, res, next) => {
+//   const token = req.cookies.token;
+//   if (!token) {
+//     res.json({ login: false });
+//   } else {
+//     jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
+//       if (err) {
+//         return res.json({ message: "Invalid Token" });
+//       } else {
+//         req.email = decoded.email;
+//         next();
+//       }
+//     });
+//   }
+// };
 
-app.get("/api/verify", verifyUser, (req, res) => {
-  return res.json({ login: true, email: req.email });
-});
+// app.get("/api/verify", verifyUser, (req, res) => {
+//   return res.json({ login: true, email: req.email });
+// });
 
 // app.get("/api/logout", (req, res) => {
 //   res.clearCookie("token");
