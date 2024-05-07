@@ -1,13 +1,3 @@
-//  NOTE add "type": "module", to package.json to use import
-// import allows you to load parts like with jwt below
-// import express from "express";
-// import dotenv from "dotenv";
-// import cors from "cors";
-// import mongoose from "mongoose";
-// import cookieParser from "cookie-parser";
-// import jwt, { decode } from "jsonwebtoken";
-// import bcrypt from "bcrypt";
-// import { UserModel } from "./models/Users.js";
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
@@ -24,7 +14,6 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(
-  // cors()
   cors({
     origin: ["https://mern-auth-xi-two.vercel.app", "http://localhost:5173"],
     methods: ["GET", "POST"],
@@ -87,7 +76,7 @@ app.post("/api/login", async (req, res) => {
       res.send("No user found");
     }
   } catch (err) {
-    // console.log("err");
+    console.log(err);
     return res.json(err);
   }
 });
