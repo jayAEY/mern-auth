@@ -29,7 +29,8 @@ const Login = ({ setDisplayEmail, setLoggedIn }) => {
             setLoggedIn(true),
             alert("Login Successful"),
             navigate("/dashboard"))
-          : alert(res.data);
+          : alert(res.data),
+          console.log(res.data);
       })
       .catch((err) => console.log(err));
   }

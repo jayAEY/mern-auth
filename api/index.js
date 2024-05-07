@@ -24,12 +24,12 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(
-  cors()
-  // cors({
-  //   origin: ["https://mern-auth-xi-two.vercel.app", "http://localhost:5173"],
-  //   methods: ["GET", "POST"],
-  //   credentials: true,
-  // })
+  // cors()
+  cors({
+    origin: ["https://mern-auth-xi-two.vercel.app", "http://localhost:5173"],
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
 );
 app.use(cookieParser());
 
@@ -87,8 +87,8 @@ app.post("/api/login", async (req, res) => {
       res.send("No user found");
     }
   } catch (err) {
-    console.log("err");
-    return res.send(err);
+    // console.log("err");
+    return res.json(err);
   }
 });
 
