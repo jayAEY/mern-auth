@@ -22,7 +22,7 @@ const { UserModel } = "./models/Users.js";
 
 dotenv.config();
 const app = express();
-// app.use(express.json());
+app.use(express.json());
 app.use(
   cors()
   // cors({
@@ -48,23 +48,23 @@ app.get("/api/test", (req, res) => {
   res.json({ body: Date() });
 });
 
-// app.post("/api/register", async (req, res) => {
-//   const { email, password } = req.body;
-//   try {
-//     const user = await UserModel.findOne({ email });
-//     if (user) {
-//       return res.send("User already exists");
-//     } else {
-//       const hashPassword = await bcrypt.hash(password, 10);
-//       const newUser = new UserModel({ email, password: hashPassword });
-//       await newUser.save();
-//       return res.send(`${email} is now registered`);
-//     }
-//   } catch (err) {
-//     console.log(err);
-//     return res.send(err);
-//   }
-// });
+app.post("/api/register", async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const user = await UserModel.findOne({ email });
+    if (user) {
+      return res.send("User already exists");
+    } else {
+      const hashPassword = await bcrypt.hash(password, 10);
+      const newUser = new UserModel({ email, password: hashPassword });
+      await newUser.save();
+      return res.send(`${email} is now registered`);
+    }
+  } catch (err) {
+    console.log(err);
+    return res.send(err);
+  }
+});
 
 app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
