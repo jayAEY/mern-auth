@@ -14,7 +14,6 @@ import { useState } from "react";
 
 const Login = ({ setDisplayEmail, setLoggedIn }) => {
   axios.defaults.withCredentials = true;
-  axios.defaults.baseURL = import.meta.env.BASE_URL;
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
