@@ -5,6 +5,8 @@ import axios from "axios";
 
 const Navbar = ({ loggedIn, setLoggedIn, setEmail }) => {
   const navigate = useNavigate();
+  axios.defaults.withCredentials = true;
+
   function logout() {
     const url = `${import.meta.env.VITE_API_URL}/logout`;
     axios

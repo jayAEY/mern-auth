@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
+  axios.defaults.withCredentials = true;
 
   useEffect(() => {
     axios.get(`${import.meta.env.VITE_API_URL}/verify`).then((res) => {
