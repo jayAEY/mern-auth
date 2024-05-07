@@ -107,3 +107,5 @@ process.env.PORT &&
   app.listen(process.env.PORT, () => {
     console.log("Server is running at localhost:" + process.env.PORT);
   });
+
+module.exports = app;
