@@ -110,7 +110,7 @@ app.get("/api/logout", (req, res) => {
 
 process.env.PORT &&
   app.listen(process.env.PORT, () => {
-    console.log("Server is running at localhost:" + process.env.PORT);
+    console.log("Server is running");
   });
 
 module.exports = app;
