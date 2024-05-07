@@ -1,13 +1,22 @@
 //  NOTE add "type": "module", to package.json to use import
 // import allows you to load parts like with jwt below
-import express from "express";
-import dotenv from "dotenv";
-import cors from "cors";
-import mongoose from "mongoose";
-import cookieParser from "cookie-parser";
-import jwt, { decode } from "jsonwebtoken";
-import bcrypt from "bcrypt";
-import { UserModel } from "./models/Users.js";
+// import express from "express";
+// import dotenv from "dotenv";
+// import cors from "cors";
+// import mongoose from "mongoose";
+// import cookieParser from "cookie-parser";
+// import jwt, { decode } from "jsonwebtoken";
+// import bcrypt from "bcrypt";
+// import { UserModel } from "./models/Users.js";
+const express = require("express");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
+// const jwt, { decode } = "jsonwebtoken";
+const bcrypt = require("bcrypt");
+const { UserModel } = "./models/Users.js";
 
 // generate key = node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 
@@ -15,7 +24,6 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(
-  // cors()
   cors({
     origin: ["https://mern-auth-xi-two.vercel.app", "http://localhost:5173"],
     methods: ["GET", "POST"],
@@ -83,25 +91,25 @@ app.get("/api/test", (req, res) => {
 //   }
 // });
 
-// const verifyUser = (req, res, next) => {
-//   const token = req.cookies.token;
-//   if (!token) {
-//     res.json({ login: false });
-//   } else {
-//     jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
-//       if (err) {
-//         return res.json({ message: "Invalid Token" });
-//       } else {
-//         req.email = decoded.email;
-//         next();
-//       }
-//     });
-//   }
-// };
+const verifyUser = (req, res, next) => {
+  const token = req.cookies.token;
+  if (!token) {
+    res.json({ login: false });
+  } else {
+    jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
+      if (err) {
+        return res.json({ message: "Invalid Token" });
+      } else {
+        req.email = decoded.email;
+        next();
+      }
+    });
+  }
+};
 
-// app.get("/api/verify", verifyUser, (req, res) => {
-//   return res.json({ login: true, email: req.email });
-// });
+app.get("/api/verify", verifyUser, (req, res) => {
+  return res.json({ login: true, email: req.email });
+});
 
 // app.get("/api/logout", (req, res) => {
 //   res.clearCookie("token");
