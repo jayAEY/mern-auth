@@ -12,8 +12,8 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const mongoose = require("mongoose");
-// const cookieParser = require("cookie-parser");
-// const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
 // const jwt, { decode } = "jsonwebtoken";
 // const bcrypt = require("bcrypt");
 // const { UserModel } = "./models/Users.js";
@@ -31,7 +31,7 @@ app.use(
   //   credentials: true,
   // })
 );
-// app.use(cookieParser());
+app.use(cookieParser());
 
 const connect = async () => {
   try {
