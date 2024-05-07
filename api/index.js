@@ -15,11 +15,12 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(
-  cors({
-    origin: ["https://my-mern-auth.vercel.app", "http://localhost:5173"],
-    methods: ["GET", "POST"],
-    credentials: true,
-  })
+  cors()
+  // cors({
+  //   origin: ["https://my-mern-auth.vercel.app", "http://localhost:5173"],
+  //   methods: ["GET", "POST"],
+  //   credentials: true,
+  // })
 );
 app.use(cookieParser());
 
@@ -33,6 +34,10 @@ const connect = async () => {
 };
 
 connect();
+
+app.get("/api/test", (req, res) => {
+  res.json({ body: Date() });
+});
 
 app.post("/api/register", async (req, res) => {
   const { email, password } = req.body;
