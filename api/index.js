@@ -11,7 +11,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 // const cookieParser = require("cookie-parser");
 // const jwt = require("jsonwebtoken");
 // const jwt, { decode } = "jsonwebtoken";
@@ -33,16 +33,16 @@ app.use(
 );
 // app.use(cookieParser());
 
-// const connect = async () => {
-//   try {
-//     mongoose.connect(process.env.URL);
-//     console.log("Connected to Mongoose");
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
+const connect = async () => {
+  try {
+    mongoose.connect(process.env.URL);
+    console.log("Connected to Mongoose");
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-// connect();
+connect();
 
 app.get("/api/test", (req, res) => {
   res.json({ body: Date() });
