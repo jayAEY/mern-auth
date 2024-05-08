@@ -65,7 +65,7 @@ function App() {
             }
           />
           <Route
-            path="/*"
+            path="*"
             element={<Home email={email} />}
           />
         </Routes>
