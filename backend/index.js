@@ -114,4 +114,4 @@ process.env.PORT &&
     console.log("Server is running");
   });
 
-module.exports = app;
+// module.exports = app;
