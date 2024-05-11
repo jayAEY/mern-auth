@@ -109,9 +109,9 @@ app.get("/logout", (req, res) => {
   return res.json({ logout: true });
 });
 
-// process.env.PORT &&
-app.listen(process.env.PORT, () => {
-  console.log("Server is running");
-});
+process.env.PORT &&
+  app.listen(process.env.PORT, () => {
+    console.log("Server is running");
+  });
 
-// module.exports = app;
+module.exports = app;
