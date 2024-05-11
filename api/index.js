@@ -23,7 +23,7 @@ app.use(
     credentials: true,
   })
 );
-app.use(cookieParser());
+// app.use(cookieParser());
 
 const connect = async () => {
   try {
