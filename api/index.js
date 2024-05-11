@@ -15,10 +15,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: [
-      "https://2nd-mern-auth-backend.vercel.app",
-      "http://localhost:5173",
-    ],
+    origin: ["https://mern-auth-xi-two.vercel.app", "http://localhost:5173"],
     methods: ["GET", "POST"],
     credentials: true,
   })
@@ -36,11 +33,11 @@ const connect = async () => {
 
 connect();
 
-app.get("/test", (req, res) => {
+app.get("/api/test", (req, res) => {
   res.json({ body: Date() });
 });
 
-app.post("/register", async (req, res) => {
+app.post("/api/register", async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await UserModel.findOne({ email });
@@ -58,7 +55,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.post("/login", async (req, res) => {
+app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
   try {
     let user = await UserModel.findOne({ email });
@@ -100,11 +97,11 @@ const verifyUser = (req, res, next) => {
   }
 };
 
-app.get("/verify", verifyUser, (req, res) => {
+app.get("/api/verify", verifyUser, (req, res) => {
   return res.json({ login: true, email: req.email });
 });
 
-app.get("/logout", (req, res) => {
+app.get("/api/logout", (req, res) => {
   res.clearCookie("token");
   return res.json({ logout: true });
 });
