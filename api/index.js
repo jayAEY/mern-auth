@@ -36,6 +36,10 @@ const connect = async () => {
 
 connect();
 
+app.get("/test", (req, res) => {
+  res.json({ body: Date() });
+});
+
 app.get("/api/test", (req, res) => {
   res.json({ body: Date() });
 });
