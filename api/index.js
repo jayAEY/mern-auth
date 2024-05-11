@@ -2,11 +2,10 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const cookieParser = require("cookie-parser");
-const jwt = require("jsonwebtoken");
-// const jwt, { decode } = "jsonwebtoken";
-const bcrypt = require("bcrypt");
-const UserModel = require("./models/Users.js");
+// const cookieParser = require("cookie-parser");
+// const jwt = require("jsonwebtoken");
+// const bcrypt = require("bcrypt");
+// const UserModel = require("./models/Users.js");
 
 // generate key = node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 
