@@ -15,7 +15,10 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: ["https://mern-auth-xi-two.vercel.app", "http://localhost:5173"],
+    origin: [
+      "https://2nd-mern-auth-backend.vercel.app",
+      "http://localhost:5173",
+    ],
     methods: ["GET", "POST"],
     credentials: true,
   })
