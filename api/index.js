@@ -18,6 +18,7 @@ app.use(
     origin: [
       "https://2nd-mern-auth-frontend.vercel.app",
       "http://localhost:5173",
+      "*",
     ],
     methods: ["GET", "POST"],
     credentials: true,
