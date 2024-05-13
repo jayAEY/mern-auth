@@ -4,11 +4,10 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
-// const bcrypt = require("bcrypt");
 const bcrypt = require("bcryptjs");
 const UserModel = require("./models/Users.js");
 
-// generate key = node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+// generate jwt key = node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 
 dotenv.config();
 const app = express();
@@ -18,7 +17,6 @@ app.use(
     origin: [
       "https://2nd-mern-auth-frontend.vercel.app",
       "http://localhost:5173",
-      // "*",
     ],
     methods: ["GET", "POST"],
     credentials: true,
@@ -76,7 +74,8 @@ app.post("/api/login", async (req, res) => {
         res.cookie("token", token, {
           httpOnly: true,
           secure: true,
-          sameSite: "None",
+          sameSite: "none",
+          partitioned: true,
         });
         return res.json({ login: true });
       }
