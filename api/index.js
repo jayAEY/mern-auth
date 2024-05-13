@@ -109,7 +109,12 @@ app.get("/api/verify", verifyUser, (req, res) => {
 });
 
 app.get("/api/logout", (req, res) => {
-  res.clearCookie("token");
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    partitioned: true,
+  });
   return res.json({ logout: true });
 });
 
