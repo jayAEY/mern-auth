@@ -12,13 +12,18 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 
-const Login = ({ setDisplayEmail, setLoggedIn }) => {
+interface Props {
+  setDisplayEmail: React.Dispatch<React.SetStateAction<string>>;
+  setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Login = ({ setDisplayEmail, setLoggedIn }: Props) => {
   axios.defaults.withCredentials = true;
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const url = `${import.meta.env.VITE_API_URL}/login`;
     axios

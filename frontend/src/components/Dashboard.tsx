@@ -1,7 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Dashboard = ({ email, setLoggedIn, loggedIn, setEmail }) => {
+interface Props {
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+  email: string;
+  setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+  loggedIn: boolean;
+}
+
+const Dashboard = ({ email, setLoggedIn, loggedIn, setEmail }: Props) => {
   axios.defaults.withCredentials = true;
   const navigate = useNavigate();
   function logout() {

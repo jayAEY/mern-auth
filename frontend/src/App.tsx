@@ -9,8 +9,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [email, setEmail] = useState("");
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("");
   axios.defaults.withCredentials = true;
 
   useEffect(() => {

@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 
-const Home = ({ email }) => {
+interface Props {
+  email: String;
+}
+
+const Home = ({ email }: Props) => {
   return (
     <main className="flex flex-col items-center justify-center w-svw h-svh bg-muted">
       <h1 className="text-7xl">🌮</h1>

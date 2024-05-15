@@ -3,7 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { ModeToggle } from "./mode-toggle";
 import axios from "axios";
 
-const Navbar = ({ loggedIn, setLoggedIn, setEmail }) => {
+interface Props {
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+  setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+  loggedIn: boolean;
+}
+const Navbar = ({ loggedIn, setLoggedIn, setEmail }: Props) => {
   const navigate = useNavigate();
   axios.defaults.withCredentials = true;
 
